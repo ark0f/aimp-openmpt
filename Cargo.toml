@@ -1,6 +1,6 @@
 [package]
 name = "aimp-openmpt"
-version = "0.1.1"
+version = "0.1.2"
 authors = ["Arsenii Lyashenko <arsenylyashenko.3@gmail.com>"]
 edition = "2018"
 
