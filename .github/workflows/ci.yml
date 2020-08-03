@@ -4,7 +4,7 @@ name: CI
 
 jobs:
   test:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     steps:
       - uses: fusion-engineering/setup-git-credentials@v2
         with:
@@ -40,7 +40,7 @@ jobs:
         with:
           command: build
   rustfmt:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     steps:
       - uses: fusion-engineering/setup-git-credentials@v2
         with:
@@ -59,7 +59,7 @@ jobs:
           command: fmt
           args: --all -- --check
   clippy:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     steps:
       - uses: fusion-engineering/setup-git-credentials@v2
         with:
