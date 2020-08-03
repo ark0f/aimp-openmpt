@@ -62,6 +62,12 @@ impl AudioDecoderBuilder for OpenMptDecoderBuilder {
         module.ctl_set("seek.sync_samples", "1");
         module.set_render_interpolation_filter_length(8);
         module.set_render_stereo_separation(200);
+        if let Some(warnings) = module.get_metadata("warnings").filter(|s| !s.is_empty()) {
+            log::warn!("Module warnings: {}", warnings);
+        }
+
+        log::trace!("Module created");
+
         Ok(OpenMptDecoder(Mutex::new(DecoderInner { module })))
     }
 }
@@ -81,10 +87,45 @@ impl OpenMptDecoder {
 impl AudioDecoder for OpenMptDecoder {
     fn file_info(&self) -> Option<FileInfo> {
         let mut info = FileInfo::default();
-        info.update()
-            .sample_rate(SAMPLE_RATE)
-            .channels(2)
-            .duration(self.get().module.get_duration_seconds());
+        {
+            let module = &mut self.get().module;
+
+            let mut guard = info.update();
+            guard
+                .sample_rate(SAMPLE_RATE)
+                .channels(2)
+                .duration(module.get_duration_seconds());
+
+            if let Some(title) = module.get_metadata("title") {
+                guard.title(title.into());
+            }
+
+            if let Some(artist) = module.get_metadata("artist") {
+                guard.artist(artist.into());
+            }
+
+            let ty = module
+                .get_metadata("originaltype_long")
+                .or_else(|| module.get_metadata("type_long"));
+            let tracker = module.get_metadata("tracker");
+            let codec = match (ty, tracker) {
+                (Some(ty), Some(tracker)) => Some(format!("{} / {}", ty, tracker)),
+                (Some(ty), None) => Some(ty),
+                (None, Some(tracker)) => Some(tracker),
+                (None, None) => None,
+            };
+            if let Some(codec) = codec {
+                guard.codec(codec.into());
+            }
+
+            if let Some(comment) = module.get_metadata("message") {
+                guard.comment(comment.into());
+            }
+
+            if let Some(date) = module.get_metadata("date") {
+                guard.date(date.into());
+            }
+        }
         Some(info)
     }
 
