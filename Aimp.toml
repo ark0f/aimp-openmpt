@@ -1,0 +1,1 @@
+dlls = ["libopenmpt.dll", "openmpt-mpg123.dll", "openmpt-ogg.dll", "openmpt-vorbis.dll", "openmpt-zlib.dll"]

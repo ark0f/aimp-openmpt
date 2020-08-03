@@ -1,0 +1,24 @@
+[package]
+name = "polygon"
+version = "0.1.0"
+authors = ["Arsenii Lyashenko <arsenylyashenko.3@gmail.com>"]
+edition = "2018"
+
+[workspace]
+
+[dependencies]
+iaimp = { git = "https://github.com/ark0f/aimp.rs", branch = "master" }
+aimp = { git = "https://github.com/ark0f/aimp.rs", branch = "master" }
+http = "0.2.1"
+thiserror = "1.0.20"
+pretty_env_logger = "0.4.0"
+log = "0.4.11"
+openmpt = "0.3.1"
+
+[lib]
+crate-type = ["cdylib"]
+
+[profile.release]
+codegen-units = 1
+lto = "thin"
+opt-level = "z"
