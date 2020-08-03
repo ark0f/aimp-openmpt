@@ -106,6 +106,7 @@ impl AudioDecoder for OpenMptDecoder {
 
             let ty = module
                 .get_metadata("originaltype_long")
+                .filter(|s| !s.is_empty())
                 .or_else(|| module.get_metadata("type_long"));
             let tracker = module.get_metadata("tracker");
             let codec = match (ty, tracker) {
