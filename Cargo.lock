@@ -21,7 +21,7 @@ dependencies = [
 [[package]]
 name = "aimp"
 version = "0.1.0"
-source = "git+https://github.com/ark0f/aimp.rs#3ad25737e3cb443920f46bf3dbba21057400eadc"
+source = "git+https://github.com/ark0f/aimp.rs#54200143a1794eaab86407e072a703930a071f73"
 dependencies = [
  "dashmap",
  "futures",
@@ -358,7 +358,7 @@ dependencies = [
 [[package]]
 name = "iaimp"
 version = "0.1.0"
-source = "git+https://github.com/ark0f/aimp.rs#3ad25737e3cb443920f46bf3dbba21057400eadc"
+source = "git+https://github.com/ark0f/aimp.rs#54200143a1794eaab86407e072a703930a071f73"
 dependencies = [
  "bindgen",
  "bitflags",
@@ -556,7 +556,6 @@ version = "0.1.0"
 dependencies = [
  "aimp",
  "http",
- "iaimp",
  "log",
  "openmpt",
  "pretty_env_logger",

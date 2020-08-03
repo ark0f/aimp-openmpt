@@ -1,14 +1,13 @@
 use aimp::{
     decoders::{
         AudioDecoder, AudioDecoderBuilder, AudioDecoderBuilderWrapper,
-        AudioDecoderNotificationsWrapper, StreamInfo,
+        AudioDecoderNotificationsWrapper, BufferingProgress, SampleFormat, StreamInfo,
     },
-    file::{FileFormat, FileFormatWrapper, FileInfo},
+    file::{FileFormat, FileFormatWrapper, FileFormatsCategory, FileInfo},
     msg_box,
     stream::Stream,
     Plugin, PluginCategory, PluginInfo, CORE,
 };
-use iaimp::{BufferingProgress, FileFormatsCategory, SampleFormat};
 use log::LevelFilter;
 use openmpt::module::{Logger, Module};
 use pretty_env_logger::env_logger::WriteStyle;

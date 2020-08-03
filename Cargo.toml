@@ -7,7 +7,6 @@ edition = "2018"
 [workspace]
 
 [dependencies]
-iaimp = { git = "https://github.com/ark0f/aimp.rs", branch = "master" }
 aimp = { git = "https://github.com/ark0f/aimp.rs", branch = "master" }
 http = "0.2.1"
 thiserror = "1.0.20"
