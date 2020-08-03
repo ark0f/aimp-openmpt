@@ -471,9 +471,8 @@ checksum = "0b631f7e854af39a1739f401cf34a8a013dfe09eac4fa4dba91e9768bd28168d"
 
 [[package]]
 name = "openmpt"
-version = "0.3.1"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "67693a23b3a21f7804ee1424f30a9abeabc8deb7950637d657df0e49800d0b3f"
+version = "0.4.0"
+source = "git+https://github.com/ark0f/openmpt-rs?branch=metadata-keys#9371c6f49d0f5466543cdfcd03d37f6f221b042a"
 dependencies = [
  "openmpt-sys",
 ]
