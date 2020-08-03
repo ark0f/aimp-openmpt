@@ -181,8 +181,7 @@ impl Plugin for OpenMpt {
         full_description: Some("*.669; *.amf; *.ams; *.c67; *.dbm; *.dtm; *.far; *.gdm; *.ice; *.st26; \
                                *.imf; *.it; *.itp; *.j2b; *.m15; *.stk; *.mdl; *.med; *.mo3; *.mod; \
                                *.mptm; *.mt2; *.mtm; *.okt; *.oxm; *.plm; *.psm; *.pt36; *.ptm; *.s3m; \
-                               *.sfx; *.sfx2; *.mms; *.stm; *.stp; *.ult; *.umx; *.wow; *.xm; *.midi; \
-                               *.wav"),
+                               *.sfx; *.sfx2; *.mms; *.stm; *.stp; *.ult; *.umx; *.wow; *.xm; *.as3m"),
         category: || PluginCategory::ADDONS | PluginCategory::DECODERS,
     };
 
