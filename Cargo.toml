@@ -1,5 +1,5 @@
 [package]
-name = "polygon"
+name = "aimp-openmpt"
 version = "0.1.1"
 authors = ["Arsenii Lyashenko <arsenylyashenko.3@gmail.com>"]
 edition = "2018"
