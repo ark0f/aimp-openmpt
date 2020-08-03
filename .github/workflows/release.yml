@@ -16,7 +16,7 @@ jobs:
       - uses: actions-rs/toolchain@v1
         with:
           profile: minimal
-          toolchain: stable
+          toolchain: stable-i686-pc-windows-msvc
           override: true
       - uses: actions-rs/cargo@v1
         with:
