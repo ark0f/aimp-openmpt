@@ -555,7 +555,6 @@ name = "polygon"
 version = "0.1.0"
 dependencies = [
  "aimp",
- "http",
  "log",
  "openmpt",
  "pretty_env_logger",
