@@ -37,6 +37,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./target/release/aimp-openmpt.zip
+          asset_path: ./target/release/aimp_openmpt.zip
           asset_name: aimp-openmpt.zip
           asset_content_type: application/zip
