@@ -3,7 +3,7 @@ on: [push, pull_request]
 name: CI
 
 jobs:
-  test:
+  build:
     runs-on: windows-latest
     steps:
       - uses: fusion-engineering/setup-git-credentials@v2
@@ -38,7 +38,9 @@ jobs:
             ${{ runner.os }}-cargo-build-target-
       - uses: actions-rs/cargo@v1
         with:
-          command: build
+          command: install
+          args: --git https://github.com/ark0f/aimp.rs
+      - run: cargo aimp --no-run
   rustfmt:
     runs-on: windows-latest
     steps:
