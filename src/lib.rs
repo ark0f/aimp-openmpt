@@ -23,9 +23,9 @@ enum Error {
     Module,
 }
 
-struct MyFileFormat;
+struct OpenMptFormats;
 
-impl FileFormat for MyFileFormat {
+impl FileFormat for OpenMptFormats {
     const DESCRIPTION: &'static str = "OpenMPT formats";
     const EXTS: &'static [&'static str] = &[
         "*.669", "*.amf", "*.ams", "*.c67", "*.dbm", "*.dtm", "*.far", "*.gdm", "*.ice", "*.st26",
@@ -47,12 +47,12 @@ fn bytes_to_seconds(bytes: i64) -> c_double {
     bytes as f64 / (SAMPLE_RATE as f64 * 2.0 * (32.0 / 8.0))
 }
 
-struct MyAudioDecoderBuilder;
+struct OpenMptDecoderBuilder;
 
-impl AudioDecoderBuilder for MyAudioDecoderBuilder {
+impl AudioDecoderBuilder for OpenMptDecoderBuilder {
     const PRIORITY: Option<i32> = Some(1000);
     const ONLY_INSTANCE: bool = false;
-    type Decoder = MyAudioDecoder;
+    type Decoder = OpenMptDecoder;
     type Error = Error;
 
     fn create(&self, mut stream: Stream) -> Result<Self::Decoder, Self::Error> {
@@ -63,23 +63,23 @@ impl AudioDecoderBuilder for MyAudioDecoderBuilder {
         module.ctl_set("seek.sync_samples", "1");
         module.set_render_interpolation_filter_length(8);
         module.set_render_stereo_separation(200);
-        Ok(MyAudioDecoder(Mutex::new(MyAudioDecoderInner { module })))
+        Ok(OpenMptDecoder(Mutex::new(DecoderInner { module })))
     }
 }
 
-struct MyAudioDecoder(Mutex<MyAudioDecoderInner>);
+struct OpenMptDecoder(Mutex<DecoderInner>);
 
-struct MyAudioDecoderInner {
+struct DecoderInner {
     module: Module,
 }
 
-impl MyAudioDecoder {
-    fn get(&self) -> MutexGuard<MyAudioDecoderInner> {
+impl OpenMptDecoder {
+    fn get(&self) -> MutexGuard<DecoderInner> {
         self.0.lock().unwrap()
     }
 }
 
-impl AudioDecoder for MyAudioDecoder {
+impl AudioDecoder for OpenMptDecoder {
     fn file_info(&self) -> Option<FileInfo> {
         let mut info = FileInfo::default();
         info.update()
@@ -172,9 +172,9 @@ impl AudioDecoder for MyAudioDecoder {
     }
 }
 
-struct MyPlugin;
+struct OpenMpt;
 
-impl Plugin for MyPlugin {
+impl Plugin for OpenMpt {
     const INFO: PluginInfo = PluginInfo {
         name: "OpenMPT",
         author: "ark0f",
@@ -196,13 +196,13 @@ impl Plugin for MyPlugin {
             .init();
 
         CORE.get()
-            .register_extension(FileFormatWrapper(MyFileFormat));
+            .register_extension(FileFormatWrapper(OpenMptFormats));
         CORE.get()
-            .register_extension(AudioDecoderBuilderWrapper::new(MyAudioDecoderBuilder));
+            .register_extension(AudioDecoderBuilderWrapper::new(OpenMptDecoderBuilder));
 
         log::trace!("Hi");
 
-        Ok(MyPlugin)
+        Ok(OpenMpt)
     }
 
     fn finish(self) -> Result<(), Error> {
@@ -210,4 +210,4 @@ impl Plugin for MyPlugin {
     }
 }
 
-aimp::main!(MyPlugin);
+aimp::main!(OpenMpt);
